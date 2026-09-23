@@ -198,6 +198,25 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .status{font-size:.85rem;color:var(--soft);margin-top:8px;min-height:1.2em}
 .note{font-size:.85rem;color:var(--soft);margin-top:24px}
 
+/* meta */
+.mset{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:540px){.mset{grid-template-columns:1fr 1fr 1fr;gap:6px}}
+.mset label{font-size:.85rem}
+.mset input{text-align:center;font-family:"Baloo 2",sans-serif;font-size:1.4rem;font-weight:800}
+.msum{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding:12px 14px;border-radius:16px;background:var(--purple-2);font-weight:700}
+.msum b{font-family:"Baloo 2",sans-serif;font-size:1.3rem;color:var(--purple-deep)}
+.mhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:26px 0 10px}
+.mhead h3{margin:0}
+.mhead span{color:var(--soft);font-weight:700;font-size:.9rem}
+.prow2{padding:12px 0;border-top:1px solid var(--line)}
+.prow2:first-child{border-top:0;padding-top:0}
+.prow2 .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.prow2 .top b{font-family:"Baloo 2",sans-serif;font-size:1.2rem;font-variant-numeric:tabular-nums;color:var(--purple-deep)}
+.prow2 .det{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.prow2 .det span{font-size:.8rem;font-weight:800;padding:2px 10px;border-radius:999px;background:var(--bg);color:var(--soft);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.prow2 .det span.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.prow2.done .top b{color:var(--ok)}
+
 /* gate */
 .gate{position:fixed;inset:0;z-index:80;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:20px}
 .gate[hidden]{display:none}
@@ -247,7 +266,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
   </div>
 
   <nav aria-label="Secciones">
-    <a href="#progreso">Progreso</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
+    <a href="#progreso">Progreso</a><a href="#meta">Meta</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
   </nav>
 
   <section id="progreso" aria-labelledby="h-prog">
@@ -261,6 +280,22 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
     <div class="mgrid" id="mgrid"></div>
     <div class="tip" id="tip"></div>
     <div id="extras"></div>
+  </section>
+
+  <section id="meta" aria-labelledby="h-meta">
+    <h2 id="h-meta">Meta por persona</h2>
+    <p class="sub">Cuánto le toca hacer a cada una. Si lo cambias, toca "Guardar meta" y se actualiza para todo el grupo.</p>
+    <div class="card">
+      <div class="mset">
+        <label>Pulseras<input type="number" min="0" inputmode="numeric" id="mp-pulseras" aria-label="Pulseras por persona"></label>
+        <label>Moños<input type="number" min="0" inputmode="numeric" id="mp-monos" aria-label="Moños por persona"></label>
+        <label>Limpiapipas<input type="number" min="0" inputmode="numeric" id="mp-limpiapipas" aria-label="Limpiapipas por persona"></label>
+      </div>
+      <div class="msum"><span>Cada una: <b id="ms-per">0</b> · Grupo: <b id="ms-tot">0</b></span><button class="btn" id="meta-save">Guardar meta</button></div>
+      <div class="status" id="meta-status"></div>
+    </div>
+    <div class="mhead"><h3>Cómo va cada una</h3><span id="meta-count"></span></div>
+    <div class="card" id="metalist"></div>
   </section>
 
   <section id="anotar" aria-labelledby="h-me">
@@ -301,12 +336,9 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 
   <section id="ajustes">
     <details id="settings">
-      <summary>Ajustes: nombres, metas, fotos, canciones y fecha</summary>
+      <summary>Ajustes: nombres, fotos, canciones y fecha</summary>
       <div class="grid" id="names"></div>
       <div class="grid">
-        <label>Meta pulseras<input type="number" min="0" id="m-pulseras"></label>
-        <label>Meta limpiapipas<input type="number" min="0" id="m-limpiapipas"></label>
-        <label>Meta moños<input type="number" min="0" id="m-monos"></label>
         <label>Fecha y hora del concierto<input type="datetime-local" id="fecha"></label>
       </div>
       <button class="btn" id="save" style="margin-top:14px">Guardar ajustes</button>
@@ -354,7 +386,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   var config={
     fecha:'2026-10-16T20:00',
     personas:['Daniela','Luisa','Angela','Vicky','Emilia','Elena','Javiera','Jo','Valentina'],
-    metas:{pulseras:450,limpiapipas:90,monos:90},
+    metas:{pulseras:324,limpiapipas:63,monos:63},
     canciones:[{id:'dynamite',n:'Dynamite'},{id:'butter',n:'Butter'},{id:'spring-day',n:'Spring Day'},{id:'boy-with-luv',n:'Boy With Luv'},{id:'permission-to-dance',n:'Permission to Dance'},{id:'mikrokosmos',n:'Mikrokosmos'}],
     fotos:{suga:0,jhope:1,jin:2,rm:3,jk:4,v:5,jimin:6}
   };
@@ -445,12 +477,14 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   $('mine').addEventListener('click',function(e){
     var b=e.target.closest('[data-delta]');if(!b||me===null)return;
     var pid='p'+me,a=get(pid)[current],k=b.dataset.k,d=parseInt(b.dataset.delta,10);
-    var beforeItem=itemTotal(current),beforeCat=catTotal(current,k),beforeGoal=memberGoal(current);
+    var beforeItem=itemTotal(current),beforeCat=catTotal(current,k),beforeGoal=memberGoal(current),beforeMine=myProgress(me);
     a[k]=Math.max(0,num(a[k])+d);
     render();queueWrite(pid);
     if(d>0){
       var g=meta(current),goal=memberGoal(current),after=catTotal(current,k);
-      if(g>0&&beforeItem<g&&itemTotal(current)>=g) celebrate('¡Meta cumplida! 🎉','Llegamos a las '+g+' '+itemName(current).toLowerCase()+'.');
+      var pg=personGoal();
+      if(pg>0&&beforeMine<pg&&myProgress(me)>=pg) celebrate('¡'+name(me)+' cumplió su meta! 🏆','Ya hizo sus '+pg+' freebies.');
+      else if(g>0&&beforeItem<g&&itemTotal(current)>=g) celebrate('¡Meta cumplida! 🎉','Llegamos a las '+g+' '+itemName(current).toLowerCase()+'.');
       else if(MEMBERS.some(function(m){return m.id===k})&&goal>0&&beforeCat<beforeGoal&&after>=goal) celebrate('¡'+mName(k)+' completo! 💜','Ya tiene sus '+goal+' '+itemName(current).toLowerCase()+'.');
       else { var btn=$('mine').querySelector('[data-delta="1"][data-k="'+k+'"]'); if(btn) burstAt(btn,14); }
     }
@@ -517,8 +551,35 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
       h+='<div class="grp">Grupo</div>'+stepRow(OT7)+(current==='pulseras'?stepRow(SONG):'');
       $('mine').innerHTML=h;
     }
-    renderOutfit();renderSongs();renderPhotos();
+    renderOutfit();renderSongs();renderPhotos();renderMeta();
   }
+
+  function perPerson(item){return Math.ceil(meta(item)/NP)}
+  function personGoal(){var t=0;ITEMS.forEach(function(it){t+=perPerson(it.id)});return t}
+  function myProgress(i){var t=0;ITEMS.forEach(function(it){t+=Math.min(personTotal(i,it.id),perPerson(it.id))});return t}
+  var MORDER=['pulseras','monos','limpiapipas'];
+  function renderMeta(){
+    var goal=personGoal(),done=0,h='';
+    for(var i=0;i<NP;i++){
+      var t=myProgress(i),ok=goal>0&&t>=goal;if(ok)done++;
+      h+='<div class="prow2'+(ok?' done':'')+'"><div class="top"><strong>'+esc(name(i))+(ok?' 🏆':'')+'</strong><b>'+t+' / '+goal+'</b></div>'+
+        bar(ok?'#2E9E6E':'#A99BF0',pct(t,goal))+'<div class="det">'+MORDER.map(function(id){var v=personTotal(i,id),m=perPerson(id);
+          return '<span class="'+(m>0&&v>=m?'ok':'')+'">'+itemName(id)+' '+v+'/'+m+'</span>'}).join('')+'</div></div>';
+    }
+    $('metalist').innerHTML=h;
+    $('meta-count').textContent=done+' de '+NP+' cumplieron';
+  }
+  function metaInputs(){var o={};MORDER.forEach(function(id){o[id]=num($('mp-'+id).value)});return o}
+  function updateMetaSum(){var o=metaInputs(),t=0;MORDER.forEach(function(id){t+=o[id]});$('ms-per').textContent=t;$('ms-tot').textContent=t*NP}
+  function fillMeta(){
+    var ae=document.activeElement;if(ae&&ae.id&&ae.id.indexOf('mp-')===0)return;
+    MORDER.forEach(function(id){$('mp-'+id).value=perPerson(id)});updateMetaSum();
+  }
+  MORDER.forEach(function(id){$('mp-'+id).addEventListener('input',function(){updateMetaSum();$('meta-status').textContent=''})});
+  $('meta-save').addEventListener('click',function(){
+    var o=metaInputs();MORDER.forEach(function(id){config.metas[id]=o[id]*NP});
+    saveConfig('Meta guardada para todo el grupo.','meta-status');
+  });
 
   function renderOutfit(){
     var n={},h='';LOOKS.forEach(function(l){n[l.id]=0});
@@ -578,11 +639,12 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   });
 
   /* ---------- config ---------- */
-  function saveConfig(msg){
+  function saveConfig(msg,sid){
+    var st=$(sid||'save-status');
     renderWhere();tick();render();
-    if(!db){$('save-status').textContent='Aplicado solo en esta pantalla (sin conexión).';return}
-    $('save-status').textContent='Guardando…';
-    db.doc('config/main').set(JSON.parse(JSON.stringify(config))).then(function(){$('save-status').textContent=msg||'Guardado para todo el grupo.'},function(){$('save-status').textContent='No se pudo guardar.'});
+    if(!db){st.textContent='Aplicado solo en esta pantalla (sin conexión).';return}
+    st.textContent='Guardando…';
+    db.doc('config/main').set(JSON.parse(JSON.stringify(config))).then(function(){st.textContent=msg||'Guardado para todo el grupo.'},function(){st.textContent='No se pudo guardar.'});
   }
   $('s-add').addEventListener('click',function(){
     var n=$('s-new').value.trim();if(!n)return;var id=slug(n);
@@ -593,13 +655,12 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   $('slist').addEventListener('click',function(e){var b=e.target.closest('[data-sdel]');if(!b)return;config.canciones=songs().filter(function(s){return s.id!==b.dataset.sdel});saveConfig('Canción quitada.')});
   $('save').addEventListener('click',function(){
     document.querySelectorAll('[data-name]').forEach(function(inp){config.personas[+inp.dataset.name]=inp.value.trim().slice(0,30)});
-    ITEMS.forEach(function(it){config.metas[it.id]=num($('m-'+it.id).value)});
     if($('fecha').value)config.fecha=$('fecha').value;
     saveConfig('Ajustes guardados para todo el grupo.');
   });
   function fillSettings(){
     document.querySelectorAll('[data-name]').forEach(function(inp){inp.value=config.personas[+inp.dataset.name]||''});
-    ITEMS.forEach(function(it){$('m-'+it.id).value=meta(it.id)});$('fecha').value=config.fecha;
+    $('fecha').value=config.fecha;fillMeta();
   }
   function applyConfig(d){
     if(!d)return;
@@ -637,7 +698,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     $('sync').textContent='Conectado. Todas ven lo mismo en tiempo real.';
     var seeded=false;
     db.doc('config/main').onSnapshot(function(s){
-      if(s.exists){applyConfig(s.data());renderWhere();tick();if(!$('settings').open)fillSettings();render()}
+      if(s.exists){applyConfig(s.data());renderWhere();tick();if(!$('settings').open)fillSettings();else fillMeta();render()}
       else if(!seeded){seeded=true;db.doc('config/main').set(JSON.parse(JSON.stringify(config))).catch(function(){})}
     },function(e){$('sync').textContent=e&&e.code==='permission-denied'?'Firebase no permite leer. Revisa las reglas de Firestore.':'Se perdió la conexión. Recarga la página.'});
     db.collection('aportes').onSnapshot(function(snap){snap.docs.forEach(function(doc){if(!dirty[doc.id])aportes[doc.id]=clean(doc.data())});render()},function(){});
@@ -665,3 +726,4 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
 </script>
 </body>
 </html>
+
