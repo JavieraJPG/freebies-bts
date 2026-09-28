@@ -63,7 +63,13 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(-
 .count .num{font-size:clamp(2rem,9vw,3rem);font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
 .count .u.big .num{font-size:clamp(3rem,13vw,4.4rem)}
 .count .lbl{font-size:.8rem;font-weight:800;opacity:.8}
-.where{margin:10px 0 14px;font-weight:700}
+.where{margin:10px 0 14px;font-weight:700;display:flex;flex-direction:column;gap:8px}
+.where .days{display:flex;gap:6px;flex-wrap:wrap}
+.where .day{display:flex;flex-direction:column;align-items:center;min-width:72px;padding:6px 10px;border-radius:14px;font-size:.8rem;line-height:1.2;
+  background:color-mix(in srgb,var(--paper) 78%,transparent);border:1px solid color-mix(in srgb,var(--purple) 25%,transparent);font-variant-numeric:tabular-nums}
+.where .day b{font-family:"Baloo 2",sans-serif;font-size:1.1rem;text-transform:capitalize}
+.where .day.next{background:var(--purple);border-color:var(--purple);color:#fff}
+.where .day.past{opacity:.5}
 .play{display:inline-flex;gap:8px;align-items:center;background:var(--ink);color:var(--bg);text-decoration:none;padding:10px 18px;border-radius:999px;font-weight:800}
 .play svg{width:18px;height:18px}
 @media (min-width:820px){.cover{margin:16px 0 0;border-radius:36px}}
@@ -235,6 +241,70 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .toast b{font-family:"Baloo 2",sans-serif;font-size:1.15rem;display:block;line-height:1.2}
 .toast a{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;background:#E53935;color:#fff;text-decoration:none;font-weight:800;border-radius:999px;padding:10px}
 .toast .x{color:var(--bg)}
+/* fanchant */
+.stage{position:relative;overflow:hidden;border-radius:28px;padding:22px 20px 18px;color:#fff;
+  background:radial-gradient(28rem 14rem at 85% -10%,rgba(242,167,200,.35),transparent 70%),linear-gradient(160deg,#3A1468,#5B2BA0);box-shadow:var(--shadow)}
+.stage p{margin:0;font-weight:700;color:rgba(255,255,255,.78);font-size:.9rem}
+.stage .names{display:flex;flex-wrap:wrap;gap:2px 16px;margin:12px 0 16px;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.15rem,4.4vw,1.6rem);line-height:1.25}
+.stage .names span{white-space:nowrap;color:var(--c);transition:transform .15s,text-shadow .15s;transform-origin:left center}
+.stage .names span.ot7{color:#fff}
+.stage .names span.on{transform:scale(1.14);text-shadow:0 0 18px var(--c)}
+.stage .names span.ot7.on{text-shadow:0 0 18px #fff}
+.drill{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 14px}
+.drill label{flex-direction:row;align-items:center;gap:8px;white-space:nowrap;color:rgba(255,255,255,.8);font-size:.88rem}
+.drill select{font:inherit;font-weight:800;color:#fff;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;max-width:62vw}
+.drill select option{color:#2A1740;background:#fff}
+.dseg{display:inline-flex;padding:3px;border-radius:999px;border:1.5px solid rgba(255,255,255,.35)}
+.dseg button{border:0;background:none;color:rgba(255,255,255,.85);border-radius:999px;padding:5px 11px;font-weight:800;font-size:.82rem;cursor:pointer}
+.dseg button[aria-pressed="true"]{background:#fff;color:#3A1468}
+.drill .bpm{font-weight:800;font-size:.82rem;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
+.stage .names.cnt span{opacity:.35}
+#f-drill-t{font-variant-numeric:tabular-nums;min-width:8.5ch}
+.fyt{aspect-ratio:16/9;max-width:520px;border-radius:18px;overflow:hidden;margin:0 0 14px;background:#000}
+.fyt iframe,.fyt #f-yt{width:100%;height:100%;display:block;border:0}
+.stage p.ytmsg{margin:-4px 0 12px;font-size:.85rem}
+.stage p.ytmsg a{color:#fff}
+.stage .sbtns{display:flex;flex-wrap:wrap;gap:8px}
+.stage .sbtns a,.stage .sbtns button{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;font-weight:800;font-size:.88rem;text-decoration:none;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.35);background:transparent;color:#fff}
+.stage .sbtns button{background:#fff;color:#3A1468;border-color:#fff}
+.stage .sbtns svg{width:12px;height:12px}
+.fbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 10px}
+.fbar .seg{display:inline-flex;padding:4px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.fbar .seg button{border:0;background:none;border-radius:999px;padding:6px 12px;font-weight:800;font-size:.85rem;cursor:pointer;color:var(--soft)}
+.fbar .seg button[aria-pressed="true"]{background:var(--purple);color:#fff}
+.fme{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;margin:14px 0 12px}
+.fme .big{font-family:"Baloo 2",sans-serif;font-size:2.2rem;font-weight:800;line-height:1;color:var(--purple-deep);font-variant-numeric:tabular-nums}
+.fme .big small{font-size:1rem;color:var(--soft)}
+.fme .txt{font-weight:800}
+.fme .txt span{display:block;font-weight:700;color:var(--soft);font-size:.85rem}
+.fme .bar{grid-column:1/-1}
+.flist{padding:6px 16px;columns:2 330px;column-gap:28px}
+.fgrp{margin:12px 0 2px;font-weight:800;color:var(--soft);font-size:.82rem;break-after:avoid}
+.flist>.frow:first-child{border-top:0}
+.frow{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--line);break-inside:avoid}
+.fchk{width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-family:"Baloo 2",sans-serif;font-weight:800;font-size:1rem;color:var(--soft);font-variant-numeric:tabular-nums;padding:0}
+.fchk svg{width:18px;height:18px;display:none}
+.fchk[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.fchk[aria-pressed="true"] svg{display:block}.fchk[aria-pressed="true"] em{display:none}
+.fchk em{font-style:normal}
+.fchk:disabled{cursor:default}
+.fmain{min-width:0}
+.fmain b{display:block;font-size:1.02rem;line-height:1.2}
+.fmeta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:3px;font-size:.8rem;font-weight:700;color:var(--soft)}
+.ftime{border:1px dashed var(--line);background:none;border-radius:999px;padding:1px 9px;font:inherit;font-weight:800;color:var(--soft);cursor:pointer;font-variant-numeric:tabular-nums}
+.ftime.set{border-style:solid;border-color:transparent;background:var(--purple-2);color:var(--purple-deep)}
+.ftime-in{width:66px;padding:1px 8px!important;border-radius:999px!important;font-weight:800;font-size:.85rem!important;text-align:center}
+.fdots{display:inline-flex;gap:3px;vertical-align:middle}
+.fdots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.fdots i.k{background:var(--ok)}
+.facts{display:flex;gap:6px}
+.facts a{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;border:1.5px solid var(--line);color:var(--ink);background:var(--paper)}
+.facts a.voz{width:auto;padding:0 12px 0 10px;gap:5px;border-color:#E53935;background:#E53935;color:#fff;font-weight:800;font-size:.82rem;border-radius:999px}
+.facts svg{width:13px;height:13px}
+.frow.ok b{color:var(--ok)}
+@media (max-width:420px){.facts a.voz span{display:none}.facts a.voz{width:38px;padding:0;justify-content:center}}
 </style>
 </head>
 <body>
@@ -270,7 +340,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
   </div>
 
   <nav aria-label="Secciones">
-    <a href="#progreso">Progreso</a><a href="#meta">Meta</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
+    <a href="#progreso">Progreso</a><a href="#meta">Meta</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#fanchant">Fanchant</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
   </nav>
 
   <section id="progreso" aria-labelledby="h-prog">
@@ -333,6 +403,37 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
     </div>
   </section>
 
+  <section id="fanchant" aria-labelledby="h-fan">
+    <h2 id="h-fan">Fanchant ARIRANG</h2>
+    <p class="sub">Los cantos oficiales de BIGHIT más Come Over. Practica con la voz guía, abre la letra y marca los que ya te sabes.</p>
+    <div class="stage">
+      <p>El canto de nombres, para practicar en Hooligan, NORMAL, FYA y Body to Body:</p>
+      <div class="names" id="f-names"></div>
+      <div class="drill">
+        <label>Ritmo de<select id="f-song" aria-label="Canción para practicar"></select></label>
+        <div class="dseg" id="f-speed" aria-label="Velocidad"><button type="button" data-sp="0.75" aria-pressed="false">Más lento</button><button type="button" data-sp="1" aria-pressed="true">Normal</button></div>
+        <div class="dseg" id="f-mode" aria-label="Sonido"><button type="button" data-md="song" aria-pressed="true">Con la canción</button><button type="button" data-md="beat" aria-pressed="false">Solo pulso</button></div>
+        <div class="dseg" id="f-reps" aria-label="Veces"><button type="button" data-rp="1" aria-pressed="true">1 vez</button><button type="button" data-rp="2" aria-pressed="false">2 veces</button></div>
+        <span class="bpm" id="f-bpm"></span>
+      </div>
+      <div class="fyt" id="f-ytwrap" hidden><div id="f-yt"></div></div>
+      <p class="ytmsg" id="f-ytmsg" hidden></p>
+      <div class="sbtns">
+        <button type="button" id="f-drill"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span id="f-drill-t">Practicar el ritmo</span></button>
+        <a href="https://www.youtube.com/playlist?list=PLzId0dFgbxBuZQmu-FMWYM7VuY92lpuNN" target="_blank" rel="noopener">Playlist con voz guía</a>
+        <a href="https://weverse.io/bts/notice/34592" target="_blank" rel="noopener">Guía oficial en Weverse</a>
+      </div>
+    </div>
+    <div class="fbar"><div class="chips" id="f-chips"></div></div>
+    <div class="fme" id="f-sum"></div>
+    <div class="fbar" style="margin-top:0">
+      <div class="seg" id="f-order" aria-label="Orden"><button data-ford="show" aria-pressed="true">Orden del concierto</button><button data-ford="album" aria-pressed="false">Orden del álbum</button></div>
+      <div class="seg" id="f-filter" aria-label="Filtro"><button data-ffil="all" aria-pressed="true">Todas</button><button data-ffil="todo" aria-pressed="false">Me faltan</button></div>
+    </div>
+    <div class="card flist" id="f-grid"></div>
+    <p class="note" style="margin-top:14px">El botón de líneas abre la letra en Genius; la guía de Weverse muestra en color lo que grita ARMY. «Parte en» es el minuto de la canción oficial donde empieza a cantar ARMY. Si alguna lo descubre practicando, lo anota y queda guardado para todas. El orden es el del primer show de la gira y puede cambiar.</p>
+  </section>
+
   <section id="musica" aria-labelledby="h-mus">
     <h2 id="h-mus">Música para hacer freebies</h2>
     <p class="sub">Toca una canción y se abre en YouTube.</p>
@@ -341,10 +442,12 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 
   <section id="ajustes">
     <details id="settings">
-      <summary>Ajustes: nombres, fotos, canciones y fecha</summary>
+      <summary>Ajustes: nombres, fotos, canciones y fechas</summary>
       <div class="grid" id="names"></div>
       <div class="grid">
-        <label>Fecha y hora del concierto<input type="datetime-local" id="fecha"></label>
+        <label>Concierto 1<input type="datetime-local" id="fecha0"></label>
+        <label>Concierto 2<input type="datetime-local" id="fecha1"></label>
+        <label>Concierto 3<input type="datetime-local" id="fecha2"></label>
       </div>
       <button class="btn" id="save" style="margin-top:14px">Guardar ajustes</button>
       <div class="status" id="save-status"></div>
@@ -389,7 +492,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   var ITEMS=[{id:'pulseras',n:'Pulseras'},{id:'limpiapipas',n:'Limpiapipas'},{id:'monos',n:'Moños'}];
   var NP=9;
   var config={
-    fecha:'2026-10-16T20:00',
+    fechas:['2026-10-14T20:00','2026-10-16T20:00','2026-10-17T20:00'],
     personas:['Daniela','Luisa','Angela','Vicky','Emilia','Elena','Javiera','Jo','Valentina'],
     metas:{pulseras:324,limpiapipas:63,monos:63},
     canciones:[{id:'dynamite',n:'Dynamite'},{id:'butter',n:'Butter'},{id:'spring-day',n:'Spring Day'},{id:'boy-with-luv',n:'Boy With Luv'},{id:'permission-to-dance',n:'Permission to Dance'},{id:'mikrokosmos',n:'Mikrokosmos'}],
@@ -459,17 +562,23 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   /* ---------- countdown ---------- */
   var DIAS=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
   var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  function target(){var d=new Date(config.fecha);return isNaN(d)?null:d}
+  var ORD=['el primer','el segundo','el tercer'];
+  function shows(){return config.fechas.map(function(f){return new Date(f)}).filter(function(d){return !isNaN(d)}).sort(function(a,b){return a-b})}
+  function nextIdx(){var l=shows(),now=new Date();for(var i=0;i<l.length;i++)if(l[i]-now>-6*3600e3)return i;return -1}
+  function target(){var l=shows(),i=nextIdx();return i<0?(l[l.length-1]||null):l[i]}
+  var lastNext=null;
   function tick(){
-    var t=target();if(!t)return;var diff=t-new Date();
-    if(diff<=0){['d','h','m','s'].forEach(function(k){$('cd-'+k).textContent='0'});$('lead').textContent=diff>-6*3600e3?'¡Es hoy! A repartir los freebies':'El concierto ya pasó';return}
-    $('lead').textContent='Faltan para ver a BTS';
+    var t=target();if(!t)return;var diff=t-new Date(),i=nextIdx(),n=shows().length;
+    if(i!==lastNext){lastNext=i;renderWhere()}
+    if(diff<=0){['d','h','m','s'].forEach(function(k){$('cd-'+k).textContent='0'});$('lead').textContent=i<0?'Los conciertos en Chile ya pasaron 💜':'¡Es hoy! A repartir los freebies';return}
+    $('lead').textContent=n>1?'Faltan para '+(ORD[i]||'el próximo')+' concierto':'Faltan para ver a BTS';
     var s=Math.floor(diff/1000);
     $('cd-d').textContent=Math.floor(s/86400);$('cd-h').textContent=Math.floor(s%86400/3600);
     $('cd-m').textContent=String(Math.floor(s%3600/60)).padStart(2,'0');$('cd-s').textContent=String(s%60).padStart(2,'0');
   }
-  function renderWhere(){var t=target();if(!t)return;
-    $('where').textContent='Estadio Nacional, '+DIAS[t.getDay()]+' '+t.getDate()+' de '+MESES[t.getMonth()]+' a las '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')}
+  function renderWhere(){var l=shows();if(!l.length)return;var nx=nextIdx();
+    $('where').innerHTML='<span>Estadio Nacional, Santiago · '+esc(MESES[l[0].getMonth()])+'</span><span class="days">'+l.map(function(t,i){
+      return '<span class="day'+(i===nx?' next':'')+(nx>=0&&i<nx||nx<0?' past':'')+'"><b>'+DIAS[t.getDay()].slice(0,3)+' '+t.getDate()+'</b>'+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+'</span>'}).join('')+'</span>'}
 
   /* ---------- static ---------- */
   $('mgrid').innerHTML=MEMBERS.map(function(m){
@@ -510,6 +619,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
 
   /* ---------- render ---------- */
   function render(){
+    renderFan();
     $('tabs').innerHTML=$('tabs2').innerHTML=ITEMS.map(function(it){return '<button class="tab" data-item="'+it.id+'" aria-pressed="'+(it.id===current)+'">'+it.n+'<small>'+itemTotal(it.id)+' de '+meta(it.id)+'</small></button>'}).join('');
     var cs=cats(current),g=meta(current),tot=itemTotal(current),R=70,C=2*Math.PI*R,base=Math.max(g,tot)||1,off=0,svg='<circle cx="90" cy="90" r="'+R+'" stroke="var(--purple-2)" style="stroke-linecap:butt"/>';
     cs.forEach(function(c){var v=catTotal(current,c.id);if(!v)return;var L=v/base*C;
@@ -664,16 +774,16 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   $('slist').addEventListener('click',function(e){var b=e.target.closest('[data-sdel]');if(!b)return;config.canciones=songs().filter(function(s){return s.id!==b.dataset.sdel});saveConfig('Canción quitada.')});
   $('save').addEventListener('click',function(){
     document.querySelectorAll('[data-name]').forEach(function(inp){config.personas[+inp.dataset.name]=inp.value.trim().slice(0,30)});
-    if($('fecha').value)config.fecha=$('fecha').value;
+    config.fechas=[0,1,2].map(function(i){return $('fecha'+i).value||config.fechas[i]}).filter(Boolean).sort();
     saveConfig('Ajustes guardados para todo el grupo.');
   });
   function fillSettings(){
     document.querySelectorAll('[data-name]').forEach(function(inp){inp.value=config.personas[+inp.dataset.name]||''});
-    $('fecha').value=config.fecha;fillMeta();
+    [0,1,2].forEach(function(i){$('fecha'+i).value=config.fechas[i]||''});fillMeta();
   }
   function applyConfig(d){
     if(!d)return;
-    if(typeof d.fecha==='string')config.fecha=d.fecha;
+    if(Array.isArray(d.fechas)){var fx=d.fechas.filter(function(f){return typeof f==='string'&&!isNaN(new Date(f))}).slice(0,3);if(fx.length)config.fechas=fx}
     if(Array.isArray(d.personas))for(var i=0;i<NP;i++)if(typeof d.personas[i]==='string')config.personas[i]=d.personas[i];
     if(d.metas&&typeof d.metas==='object')ITEMS.forEach(function(it){if(d.metas[it.id]!==undefined)config.metas[it.id]=num(d.metas[it.id])});
     if(Array.isArray(d.canciones))config.canciones=d.canciones.filter(function(s){return s&&typeof s.id==='string'&&typeof s.n==='string'}).map(function(s){return {id:s.id.slice(0,40),n:s.n.slice(0,40)}});
@@ -691,6 +801,159 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     },function(err){writing[pid]=false;dirty[pid]=false;
       $('sync').textContent=err&&err.code==='permission-denied'?'Firebase rechazó el guardado. Revisa las reglas de Firestore y el código del grupo.':'No se pudo guardar. Revisa tu conexión.'});
   }
+
+  /* ---------- fanchant ---------- */
+  var FAN=[
+    {id:'body-to-body',yt:'RBaSiVjtKR4',bpm:120,n:'Body to Body',live:15,v:'1lWbw3cAM5Y'},
+    {id:'hooligan',yt:'lKgzkmTKvHU',bpm:135,n:'Hooligan',live:1},
+    {id:'aliens',bpm:97,n:'Aliens',live:2},
+    {id:'fya',yt:'QWDayFgPDjQ',bpm:129,n:'FYA',live:13,v:'k2RiTOwEd90'},
+    {id:'2-0',bpm:65,n:'2.0',live:9},
+    {id:'no-29',n:'No. 29'},
+    {id:'swim',bpm:94,n:'SWIM',live:7,mv:'b4iVv91Z6lY'},
+    {id:'merry-go-round',bpm:84,n:'Merry Go Round',live:8},
+    {id:'normal',yt:'4QMp7lCxEb4',bpm:73,n:'NORMAL',live:10},
+    {id:'like-animals',bpm:78,n:'Like Animals',live:5},
+    {id:'tdkbu',n:'they don’t know ’bout us',live:4},
+    {id:'one-more-night',n:'One More Night',busan:true},
+    {id:'please',n:'Please',live:22,v:'b878IUNdhVs'},
+    {id:'into-the-sun',bpm:99,n:'Into the Sun',live:23},
+    {id:'come-over',n:'Come Over',live:17,extra:true}
+  ];
+  var FAN_T0={'body-to-body':'0:10','hooligan':'0:07','fya':'0:07','normal':'0:01'};
+  var fan={sabe:{},tiempos:{}};
+  var CHANT=[['Kim Namjoon','rm'],['Kim Seokjin','jin'],['Min Yoongi','suga'],['Jung Hoseok','jhope'],['Park Jimin','jimin'],['Kim Taehyung','v'],['Jeon Jungkook','jk']];
+  $('f-names').innerHTML=CHANT.map(function(c){var m=MEMBERS.filter(function(x){return x.id===c[1]})[0];return '<span style="--c:'+m.c+'">'+c[0]+'!</span>'}).join('')+'<span class="ot7">BTS!</span>';
+  var fOrder='show',fFilter='all',fEdit=null,drillT=null;
+  var CHECK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var LYR='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.5h10M3 6.5h10M3 9.5h7M3 12.5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+  var NOTE='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12.5a2 2 0 1 1-2-2 2 2 0 0 1 2 2zm0 0V3.5l7-1.5v8.5a2 2 0 1 1-2-2 2 2 0 0 1 2 2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  function fanTime(id){var t=fan.tiempos[id];return typeof t==='string'&&t?t:(FAN_T0[id]||'')}
+  function knows(i,id){var s=fan.sabe['p'+i];return !!(s&&s[id]===true)}
+  function posLabel(s){return s.extra?'Canción '+s.live+', sin guía oficial':s.live===1?'Abre el show':s.live===23?'Cierra el show':s.live?'Canción '+s.live+' del show':s.busan?'Solo en algunos shows':'Interludio, no va en el show'}
+  function fanRow(s,idx){
+    var ok=me!==null&&knows(me,s.id),who=[],dots='';
+    for(var i=0;i<NP;i++){var k=knows(i,s.id);if(k)who.push(name(i));dots+='<i'+(k?' class="k"':'')+'></i>'}
+    var voz=s.v?'https://www.youtube.com/watch?v='+s.v:yt('[Official Fanchant/응원법] BTS 방탄소년단 '+s.n);
+    var song=s.mv?'https://www.youtube.com/watch?v='+s.mv:yt('BTS '+s.n+' official');
+    var t=fanTime(s.id),num=idx;
+    var time=fEdit===s.id?'<input type="text" class="ftime-in" inputmode="numeric" maxlength="5" placeholder="m:ss" data-ftime="'+s.id+'" value="'+esc(t)+'" aria-label="Minuto en que parte el canto">':
+      '<button class="ftime'+(t?' set':'')+'" data-fedit="'+s.id+'">'+(t?'Parte en '+esc(t):'+ minuto')+'</button>';
+    return '<div class="frow'+(ok?' ok':'')+'"><button class="fchk" data-fknow="'+s.id+'" aria-pressed="'+ok+'"'+(me===null?' disabled':'')+' aria-label="'+(ok?'Ya me sé ':'Marcar que me sé ')+esc(s.n)+'"><em>'+num+'</em>'+CHECK+'</button>'+
+      '<div class="fmain"><b>'+esc(s.n)+'</b><span class="fmeta"><span>'+posLabel(s)+'</span>'+time+'<span class="fdots" title="'+(who.length?esc(who.join(', ')):'Nadie todavía')+'">'+dots+'</span></span></div>'+
+      '<div class="facts"><a class="voz" href="'+voz+'" target="_blank" rel="noopener" aria-label="Voz guía de '+esc(s.n)+'">'+PLAY+'<span>Voz guía</span></a><a href="https://genius.com/search?q='+encodeURIComponent('BTS '+s.n)+'" target="_blank" rel="noopener" aria-label="Letra de '+esc(s.n)+'" title="Letra">'+LYR+'</a><a href="'+song+'" target="_blank" rel="noopener" aria-label="Canción oficial de '+esc(s.n)+'" title="Canción oficial">'+NOTE+'</a></div></div>';
+  }
+  function renderFan(){
+    $('f-chips').innerHTML=config.personas.map(function(n,i){return '<button class="chip" data-fp="'+i+'" aria-pressed="'+(me===i)+'">'+esc(name(i))+'</button>'}).join('');
+    var mine=0,all=0;
+    FAN.forEach(function(s){if(me!==null&&knows(me,s.id))mine++;for(var i=0;i<NP;i++)if(knows(i,s.id))all++});
+    var gp=Math.round(pct(all,FAN.length*NP));
+    $('f-sum').innerHTML=me===null?'<span class="big">'+gp+'<small>%</small></span><span class="txt">del grupo ya se sabe los cantos<span>Toca tu nombre arriba para marcar los tuyos.</span></span>'+bar('var(--ok)',gp):
+      '<span class="big">'+mine+'<small>/'+FAN.length+'</small></span><span class="txt">'+(mine===FAN.length?esc(name(me))+' se los sabe todos':'cantos que '+esc(name(me))+' ya se sabe')+'<span>Todo el grupo va en '+gp+'%</span></span>'+bar('var(--ok)',pct(mine,FAN.length));
+    $('f-order').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ford===fOrder)});
+    $('f-filter').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ffil===fFilter);b.hidden=b.dataset.ffil==='todo'&&me===null});
+    var ae=document.activeElement,active=ae&&ae.dataset?ae.dataset.ftime:null,aval=active?ae.value:'';
+    var list=FAN.filter(function(s){return !(fFilter==='todo'&&me!==null&&knows(me,s.id))}),h='';
+    if(fOrder==='show'){
+      var inS=list.filter(function(s){return s.live}).sort(function(a,b){return a.live-b.live}),out=list.filter(function(s){return !s.live});
+      h=inS.map(function(s,i){return fanRow(s,i+1)}).join('')+(out.length?'<p class="fgrp">Fuera del show habitual</p>'+out.map(function(s){return fanRow(s,'·')}).join(''):'');
+    }else h=list.map(function(s){return fanRow(s,FAN.indexOf(s)+1)}).join('');
+    $('f-grid').innerHTML=h||'<p class="empty" style="padding:12px 0">¡Te sabes todos! A gritar en el Estadio Nacional 💜</p>';
+    var el=fEdit&&document.querySelector('[data-ftime="'+fEdit+'"]');
+    if(el){if(active===fEdit)el.value=aval;el.focus();var v=el.value;el.setSelectionRange(v.length,v.length)}
+  }
+  function fanSave(patch){if(!db)return;db.doc('fanchant/main').set(patch,{merge:true}).catch(function(e){$('sync').textContent=e&&e.code==='permission-denied'?'Firebase no dejó guardar el fanchant. Revisa las reglas de Firestore.':'No se pudo guardar el fanchant.'})}
+  function saveTime(inp){var id=inp.dataset.ftime,v=inp.value.trim().replace('.',':');fEdit=null;
+    if(v===''||/^\d{1,2}:[0-5]\d$/.test(v)){if(v!==fanTime(id)){fan.tiempos[id]=v;var o={};o[id]=v;fanSave({tiempos:o})}}
+    renderFan()}
+  $('f-chips').addEventListener('click',function(e){var b=e.target.closest('[data-fp]');if(!b)return;me=parseInt(b.dataset.fp,10);try{localStorage.setItem('freebies-yo',String(me))}catch(err){}render()});
+  $('f-order').addEventListener('click',function(e){var b=e.target.closest('[data-ford]');if(!b)return;fOrder=b.dataset.ford;renderFan()});
+  $('f-filter').addEventListener('click',function(e){var b=e.target.closest('[data-ffil]');if(!b)return;fFilter=b.dataset.ffil;renderFan()});
+  $('f-grid').addEventListener('click',function(e){
+    var c=e.target.closest('[data-fknow]');
+    if(c&&me!==null){var id=c.dataset.fknow,p='p'+me,val=!knows(me,id);if(!fan.sabe[p])fan.sabe[p]={};fan.sabe[p][id]=val;var o={};o[p]={};o[p][id]=val;fanSave({sabe:o});
+      if(val){burstAt(c,24);var n=0;FAN.forEach(function(s){if(knows(me,s.id))n++});if(n===FAN.length)celebrate('¡'+name(me)+' se sabe los 15!','Lista para gritar en el Estadio Nacional')}
+      renderFan();return}
+    var t=e.target.closest('[data-fedit]');if(t){fEdit=t.dataset.fedit;renderFan()}
+  });
+  var _rf=renderFan;renderFan=function(){_rf();if(!drillT)fillDrill()};
+  $('f-grid').addEventListener('keydown',function(e){var t=e.target.closest('[data-ftime]');if(!t)return;if(e.key==='Enter')t.blur();if(e.key==='Escape'){fEdit=null;renderFan()}});
+  $('f-grid').addEventListener('focusout',function(e){var t=e.target.closest&&e.target.closest('[data-ftime]');if(t&&fEdit)saveTime(t)});
+  var fSong='hooligan',fSpeed=1,fReps=1,fMode='song',actx=null,ytP=null,ytReady=false,ytQ=null,ytTried=false;
+  function secs(t){var m=/^(\d{1,2}):(\d{2})$/.exec(t||'');return m?(+m[1])*60+(+m[2]):null}
+  function mmss(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+  function drillSong(){for(var i=0;i<FAN.length;i++)if(FAN[i].id===fSong)return FAN[i];return FAN[1]}
+  function drillBpm(s){var b=s.bpm||100;return b<90?b*2:b}
+  function fillDrill(){
+    var DRILL=['hooligan','normal','fya','body-to-body'],order=FAN.filter(function(s){return DRILL.indexOf(s.id)>=0}).sort(function(a,b){return a.live-b.live});
+    $('f-song').innerHTML=order.map(function(s){return '<option value="'+s.id+'"'+(s.id===fSong?' selected':'')+'>'+esc(s.n)+'</option>'}).join('');
+    var s=drillSong(),st=fanTime(s.id);$('f-bpm').textContent=(s.bpm?Math.round(drillBpm(s)*fSpeed)+' BPM':'~'+Math.round(100*fSpeed)+' BPM aprox.')+(st?', parte en '+st:'');
+    $('f-mode').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.md===fMode)});
+    $('f-reps').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.rp===fReps)});
+    $('f-speed').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.sp===fSpeed)});
+  }
+  function click(acc){try{if(!actx)return;var o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.frequency.value=acc?1320:880;
+    g.gain.setValueAtTime(acc?.28:.14,t);g.gain.exponentialRampToValueAtTime(.001,t+.08);o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+.09)}catch(e){}}
+  function drillStop(pause){clearInterval(drillT);drillT=null;if(pause!==false&&ytP&&ytReady)try{ytP.pauseVideo()}catch(e){}$('f-names').classList.remove('cnt');$('f-names').querySelectorAll('span').forEach(function(x){x.classList.remove('on')});$('f-drill-t').textContent='Practicar el ritmo'}
+  $('f-song').addEventListener('change',function(){fSong=this.value;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
+  $('f-speed').addEventListener('click',function(e){var b=e.target.closest('[data-sp]');if(!b)return;fSpeed=+b.dataset.sp;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
+  $('f-reps').addEventListener('click',function(e){var b=e.target.closest('[data-rp]');if(!b)return;fReps=+b.dataset.rp;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
+  $('f-mode').addEventListener('click',function(e){var b=e.target.closest('[data-md]');if(!b)return;fMode=b.dataset.md;drillStop();$('f-ytwrap').hidden=fMode!=='song'||!ytP;fillDrill()});
+  function ytMsg(t){$('f-ytmsg').hidden=!t;$('f-ytmsg').innerHTML=t||''}
+  function ytLoad(cb){
+    if(ytReady){cb();return}ytQ=cb;if(ytTried)return;ytTried=true;
+    function mk(){ytP=new YT.Player('f-yt',{videoId:drillSong().yt,playerVars:{playsinline:1,rel:0},events:{
+      onReady:function(){ytReady=true;var q=ytQ;ytQ=null;if(q)q()},
+      onError:function(){ytFail('Esta canción no se puede reproducir aquí.')}}})}
+    if(window.YT&&YT.Player)mk();
+    else{window.onYouTubeIframeAPIReady=mk;var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';sc.onerror=function(){ytFail('No se pudo cargar YouTube.')};document.head.appendChild(sc)}
+    setTimeout(function(){if(!ytReady&&ytQ)ytFail('YouTube no respondió.')},9000);
+  }
+  function ytFail(why){var s=drillSong();ytQ=null;var was=!!drillT;drillStop(false);
+    ytMsg(why+' Practica con el pulso o <a href="https://www.youtube.com/watch?v='+s.yt+'" target="_blank" rel="noopener">ábrela en YouTube</a>.');
+    fMode='beat';fillDrill();if(was)drillBeat()}
+  function drillMusic(){
+    var s=drillSong(),sp=$('f-names').querySelectorAll('span'),st=secs(fanTime(s.id));if(st===null)st=0;
+    var off=st>12?st-4:0,per=2*60/drillBpm(s),total=sp.length*fReps*per,rated=false;
+    $('f-ytwrap').hidden=false;ytMsg('');drillT=-1;$('f-drill-t').textContent='Cargando…';$('f-names').classList.add('cnt');
+    ytLoad(function(){
+      if(drillT===null)return;
+      try{ytP.loadVideoById({videoId:s.yt,startSeconds:off});ytP.unMute()}catch(e){ytFail('No se pudo reproducir.');return}
+      drillT=setInterval(function(){
+        var t=0,stt=-1;try{t=ytP.getCurrentTime()||0;stt=ytP.getPlayerState()}catch(e){}
+        if(stt===1&&!rated){rated=true;try{ytP.setPlaybackRate(fSpeed)}catch(e){}}
+        if(stt===2&&t>0.3){drillStop(false);return}
+        if(t<st){$('f-drill-t').textContent=stt===1?mmss(t)+' de '+fanTime(s.id):'Cargando…';return}
+        var i=Math.floor((t-st)/per);
+        if(i>=sp.length*fReps){drillStop(false);return}
+        $('f-names').classList.remove('cnt');sp.forEach(function(x,j){x.classList.toggle('on',j===i%sp.length)});$('f-drill-t').textContent='Detener';
+      },40);
+    });
+  }
+  function drillBeat(){
+    try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){actx=null}
+    var s=drillSong(),sp=$('f-names').querySelectorAll('span'),beat=60000/(drillBpm(s)*fSpeed),k=0,PER=2,REPS=fReps;
+    var st=secs(fanTime(s.id)),off=0,COUNT=4;
+    if(st!==null){off=st>12?st-4:0;COUNT=Math.max(1,Math.round((st-off)*1000/(beat*fSpeed)))}
+    var END=COUNT+sp.length*PER*REPS;
+    $('f-names').classList.add('cnt');
+    function step(){
+      if(k>=END){drillStop();return}
+      if(k<COUNT){if(st!==null){var now=off+k*beat*fSpeed/1000;$('f-drill-t').textContent=mmss(now)+' de '+fanTime(s.id)}else $('f-drill-t').textContent='Atentas… '+(COUNT-k);click(k===0)}
+      else{var j=k-COUNT;if(j===0){$('f-names').classList.remove('cnt')}
+        if(j%PER===0){sp.forEach(function(x){x.classList.remove('on')});sp[(j/PER)%sp.length].classList.add('on');click(true);$('f-drill-t').textContent='Detener'}else click(false)}
+      k++}
+    step();drillT=setInterval(step,beat);
+  }
+  $('f-drill').addEventListener('click',function(){
+    if(drillT!==null){drillStop();return}
+    if(fMode==='song'&&drillSong().yt)drillMusic();else drillBeat();
+  });
+  fillDrill();
+  function cleanFan(d){var o={sabe:{},tiempos:{}};if(!d||typeof d!=='object')return o;
+    if(d.sabe&&typeof d.sabe==='object')for(var i=0;i<NP;i++){var s=d.sabe['p'+i];if(s&&typeof s==='object'){o.sabe['p'+i]={};FAN.forEach(function(f){if(s[f.id]===true)o.sabe['p'+i][f.id]=true})}}
+    if(d.tiempos&&typeof d.tiempos==='object')FAN.forEach(function(f){var t=d.tiempos[f.id];if(typeof t==='string'&&(t===''||/^\d{1,2}:[0-5]\d$/.test(t)))o.tiempos[f.id]=t});
+    return o}
 
   renderWhere();tick();fillSettings();render();renderRecs();
   setInterval(tick,1000);
@@ -711,6 +974,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
       else if(!seeded){seeded=true;db.doc('config/main').set(JSON.parse(JSON.stringify(config))).catch(function(){})}
     },function(e){$('sync').textContent=e&&e.code==='permission-denied'?'Firebase no permite leer. Revisa las reglas de Firestore.':'Se perdió la conexión. Recarga la página.'});
     db.collection('aportes').onSnapshot(function(snap){snap.docs.forEach(function(doc){if(!dirty[doc.id])aportes[doc.id]=clean(doc.data())});render()},function(){});
+    db.doc('fanchant/main').onSnapshot(function(s){fan=cleanFan(s.exists?s.data():null);renderFan()},function(){});
     db.collection('recordatorios').onSnapshot(function(snap){
       recs=snap.docs.map(function(doc){var x=doc.data()||{};return {id:doc.id,texto:String(x.texto||'').slice(0,140),fecha:typeof x.fecha==='string'?x.fecha:'',hecho:x.hecho===true,creado:Number(x.creado)||0}});renderRecs();
     },function(){});
