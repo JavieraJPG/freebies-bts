@@ -305,6 +305,30 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .facts svg{width:13px;height:13px}
 .frow.ok b{color:var(--ok)}
 @media (max-width:420px){.facts a.voz span{display:none}.facts a.voz{width:38px;padding:0;justify-content:center}}
+/* fanchant completo */
+.full{border-radius:28px;overflow:hidden;background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow)}
+.full .top{padding:16px 16px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.full .fyt2{aspect-ratio:16/9;background:#000;margin:14px 0 0}
+.full .fyt2 iframe,.full #f2-yt{width:100%;height:100%;display:block;border:0}
+.live{padding:18px 18px 16px;color:#fff;background:linear-gradient(160deg,#3A1468,#5B2BA0);min-height:132px;display:grid;gap:6px;align-content:center}
+.live .now{font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.5rem,6vw,2.2rem);line-height:1.15;color:var(--pink);transition:transform .15s}
+.live .now.idle{color:rgba(255,255,255,.55);font-size:1.1rem}
+.live .now.pop{transform:scale(1.06)}
+.live .nxt{font-weight:700;font-size:.9rem;color:rgba(255,255,255,.75)}
+.live .prog{height:6px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden}
+.live .prog i{display:block;height:100%;width:0;background:var(--pink);border-radius:999px}
+.full .ctl2{display:flex;flex-wrap:wrap;gap:8px;padding:14px 16px}
+.full .ctl2 button{font:inherit;font-weight:800;font-size:.9rem;border-radius:999px;padding:10px 16px;cursor:pointer;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+.full .ctl2 button.main{background:#E53935;border-color:#E53935;color:#fff}
+.full .ctl2 button.mark{background:var(--purple);border-color:var(--purple);color:#fff}
+.full .ctl2 a{align-self:center;font-weight:800;font-size:.88rem}
+.cues{padding:0 16px 14px}
+.cue{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line)}
+.cue .tt{border:0;border-radius:999px;background:var(--purple-2);color:var(--purple-deep);font:inherit;font-weight:800;font-size:.85rem;padding:5px 10px;cursor:pointer;font-variant-numeric:tabular-nums}
+.cue input{padding:7px 10px!important;font-weight:700}
+.cue.on{background:color-mix(in srgb,var(--pink) 18%,transparent);border-radius:12px}
+.cue.on .tt{background:var(--pink);color:#3A0F2A}
+.cues .empty{padding:10px 0 4px}
 </style>
 </head>
 <body>
@@ -340,7 +364,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
   </div>
 
   <nav aria-label="Secciones">
-    <a href="#progreso">Progreso</a><a href="#meta">Meta</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#fanchant">Fanchant</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
+    <a href="#progreso">Progreso</a><a href="#meta">Meta</a><a href="#anotar">Anotar</a><a href="#outfit">Outfit, hanbok y maquillaje</a><a href="#recordatorios">Recordatorios</a><a href="#fanchant">Fanchant</a><a href="#completo">Fanchant completo</a><a href="#musica">Música</a><a href="#ajustes">Ajustes</a>
   </nav>
 
   <section id="progreso" aria-labelledby="h-prog">
@@ -432,6 +456,23 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
     </div>
     <div class="card flist" id="f-grid"></div>
     <p class="note" style="margin-top:14px">El botón de líneas abre la letra en Genius; la guía de Weverse muestra en color lo que grita ARMY. «Parte en» es el minuto de la canción oficial donde empieza a cantar ARMY. Si alguna lo descubre practicando, lo anota y queda guardado para todas. El orden es el del primer show de la gira y puede cambiar.</p>
+  </section>
+
+  <section id="completo" aria-labelledby="h-full">
+    <h2 id="h-full">Fanchant completo</h2>
+    <p class="sub">La canción entera con las partes de ARMY marcadas en el momento justo. Las marcas las arma el grupo mirando la guía oficial.</p>
+    <div class="full">
+      <div class="top"><div class="chips" id="f2-tabs"></div><a id="f2-guide" href="#" target="_blank" rel="noopener" style="font-weight:800;font-size:.88rem">Guía oficial en Weverse</a></div>
+      <div class="fyt2" id="f2-wrap"><div id="f2-yt"></div></div>
+      <div class="live" aria-live="polite"><div class="now idle" id="f2-now">Dale play para empezar</div><div class="nxt" id="f2-next"></div><div class="prog"><i id="f2-prog"></i></div></div>
+      <div class="ctl2">
+        <button type="button" class="main" id="f2-play">▶ Reproducir</button>
+        <button type="button" class="mark" id="f2-mark">＋ Marcar aquí</button>
+        <button type="button" id="f2-back">↺ 5 s</button>
+      </div>
+      <div class="cues" id="f2-cues"></div>
+    </div>
+    <p class="note" style="margin-top:12px">Cómo armarlo: abran la guía de Weverse, pongan la canción y toquen «Marcar aquí» justo cuando entra ARMY. Después escriban qué se grita (por ejemplo «nombres» o «B!T!S!»). Queda guardado para todas y, al reproducir, cada marca aparece en grande en su segundo.</p>
   </section>
 
   <section id="musica" aria-labelledby="h-mus">
@@ -812,7 +853,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     {id:'no-29',n:'No. 29'},
     {id:'swim',bpm:94,n:'SWIM',live:7,mv:'b4iVv91Z6lY'},
     {id:'merry-go-round',bpm:84,n:'Merry Go Round',live:8},
-    {id:'normal',yt:'4QMp7lCxEb4',bpm:73,n:'NORMAL',live:10},
+    {id:'normal',yt:'4QMp7lCxEb4',bpm:75,noDouble:true,n:'NORMAL',live:10},
     {id:'like-animals',bpm:78,n:'Like Animals',live:5},
     {id:'tdkbu',n:'they don’t know ’bout us',live:4},
     {id:'one-more-night',n:'One More Night',busan:true},
@@ -821,7 +862,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     {id:'come-over',n:'Come Over',live:17,extra:true}
   ];
   var FAN_T0={'body-to-body':'0:10','hooligan':'0:07','fya':'0:07','normal':'0:01'};
-  var fan={sabe:{},tiempos:{}};
+  var fan={sabe:{},tiempos:{},cues:{}};
   var CHANT=[['Kim Namjoon','rm'],['Kim Seokjin','jin'],['Min Yoongi','suga'],['Jung Hoseok','jhope'],['Park Jimin','jimin'],['Kim Taehyung','v'],['Jeon Jungkook','jk']];
   $('f-names').innerHTML=CHANT.map(function(c){var m=MEMBERS.filter(function(x){return x.id===c[1]})[0];return '<span style="--c:'+m.c+'">'+c[0]+'!</span>'}).join('')+'<span class="ot7">BTS!</span>';
   var fOrder='show',fFilter='all',fEdit=null,drillT=null;
@@ -883,7 +924,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   function secs(t){var m=/^(\d{1,2}):(\d{2})$/.exec(t||'');return m?(+m[1])*60+(+m[2]):null}
   function mmss(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
   function drillSong(){for(var i=0;i<FAN.length;i++)if(FAN[i].id===fSong)return FAN[i];return FAN[1]}
-  function drillBpm(s){var b=s.bpm||100;return b<90?b*2:b}
+  function drillBpm(s){var b=s.bpm||100;return b<90&&!s.noDouble?b*2:b}
   function fillDrill(){
     var DRILL=['hooligan','normal','fya','body-to-body'],order=FAN.filter(function(s){return DRILL.indexOf(s.id)>=0}).sort(function(a,b){return a.live-b.live});
     $('f-song').innerHTML=order.map(function(s){return '<option value="'+s.id+'"'+(s.id===fSong?' selected':'')+'>'+esc(s.n)+'</option>'}).join('');
@@ -950,11 +991,64 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     if(fMode==='song'&&drillSong().yt)drillMusic();else drillBeat();
   });
   fillDrill();
-  function cleanFan(d){var o={sabe:{},tiempos:{}};if(!d||typeof d!=='object')return o;
+  function cleanFan(d){var o={sabe:{},tiempos:{},cues:{}};if(d&&d.cues&&typeof d.cues==='object')Object.keys(d.cues).forEach(function(k){if(!/^[a-z0-9-]{1,40}$/.test(k)||!Array.isArray(d.cues[k]))return;o.cues[k]=d.cues[k].filter(function(q){return q&&typeof q.t==='number'&&q.t>=0&&q.t<900}).slice(0,80).map(function(q){return {t:Math.round(q.t*10)/10,x:typeof q.x==='string'?q.x.slice(0,80):''}})});if(!d||typeof d!=='object')return o;
     if(d.sabe&&typeof d.sabe==='object')for(var i=0;i<NP;i++){var s=d.sabe['p'+i];if(s&&typeof s==='object'){o.sabe['p'+i]={};FAN.forEach(function(f){if(s[f.id]===true)o.sabe['p'+i][f.id]=true})}}
     if(d.tiempos&&typeof d.tiempos==='object')FAN.forEach(function(f){var t=d.tiempos[f.id];if(typeof t==='string'&&(t===''||/^\d{1,2}:[0-5]\d$/.test(t)))o.tiempos[f.id]=t});
     return o}
 
+  /* ---------- fanchant completo ---------- */
+  var FULL=[{id:'aliens',n:'Aliens',yt:'EC9_h_elSAY',guide:'https://weverse.io/bts/notice/34596'}];
+  var f2Song='aliens',f2P=null,f2Ready=false,f2T=null,f2Cur=-1,f2Pending=null;
+  function f2S(){for(var i=0;i<FULL.length;i++)if(FULL[i].id===f2Song)return FULL[i];return FULL[0]}
+  function f2Cues(){var c=fan.cues&&fan.cues[f2Song];return Array.isArray(c)?c.slice().sort(function(a,b){return a.t-b.t}):[]}
+  function f2Save(list){if(!fan.cues)fan.cues={};fan.cues[f2Song]=list;var o={};o[f2Song]=list;fanSave({cues:o})}
+  function f2Render(){
+    $('f2-tabs').innerHTML=FULL.map(function(s){return '<button class="chip" data-f2s="'+s.id+'" aria-pressed="'+(s.id===f2Song)+'">'+esc(s.n)+'</button>'}).join('');
+    $('f2-guide').href=f2S().guide;
+    var ae=document.activeElement,ai=ae&&ae.dataset?ae.dataset.f2x:null,av=ai!=null?ae.value:'';
+    var c=f2Cues();
+    $('f2-cues').innerHTML=c.length?c.map(function(q,i){return '<div class="cue'+(i===f2Cur?' on':'')+'" data-f2i="'+i+'"><button class="tt" data-f2seek="'+q.t+'" title="Ir a este momento">'+mmss(q.t)+'</button><input type="text" maxlength="80" placeholder="¿Qué grita ARMY aquí?" data-f2x="'+i+'" value="'+esc(q.x||'')+'" aria-label="Nota de la marca en '+mmss(q.t)+'"><button class="x" data-f2del="'+i+'" aria-label="Borrar marca">×</button></div>'}).join(''):
+      '<p class="empty">Todavía no hay marcas para '+esc(f2S().n)+'. Pon la canción y toca «Marcar aquí» cuando entre ARMY.</p>';
+    if(f2Pending!==null){var el=document.querySelector('[data-f2x="'+f2Pending+'"]');f2Pending=null;if(el)el.focus()}
+    else if(ai!=null){var e2=document.querySelector('[data-f2x="'+ai+'"]');if(e2){e2.value=av;e2.focus()}}
+  }
+  function ytApi(cb){
+    if(window.YT&&YT.Player){cb();return}
+    if(!document.querySelector('script[src*="youtube.com/iframe_api"]')){var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';document.head.appendChild(sc)}
+    var n=0,iv=setInterval(function(){if(window.YT&&YT.Player){clearInterval(iv);cb()}else if(++n>60){clearInterval(iv);$('f2-now').className='now idle';$('f2-now').innerHTML='No se pudo cargar YouTube. <a style="color:#fff" href="https://www.youtube.com/watch?v='+f2S().yt+'" target="_blank" rel="noopener">Ábrela en YouTube</a>.'}},200);
+  }
+  function f2Load(cb){
+    if(f2Ready){cb();return}
+    ytApi(function(){if(f2P){return}f2P=new YT.Player('f2-yt',{videoId:f2S().yt,playerVars:{playsinline:1,rel:0},events:{
+      onReady:function(){f2Ready=true;cb()},
+      onStateChange:function(e){$('f2-play').textContent=e.data===1?'❚❚ Pausa':'▶ Reproducir';if(e.data===1)f2Loop();else if(e.data!==3){clearInterval(f2T);f2T=null}},
+      onError:function(){$('f2-now').className='now idle';$('f2-now').innerHTML='Esta canción no se puede reproducir aquí. <a style="color:#fff" href="https://www.youtube.com/watch?v='+f2S().yt+'" target="_blank" rel="noopener">Ábrela en YouTube</a>.'}}})});
+  }
+  function f2Time(){try{return f2P.getCurrentTime()||0}catch(e){return 0}}
+  function f2Tick(){
+    var t=f2Time(),c=f2Cues(),i=-1;for(var k=0;k<c.length;k++)if(c[k].t<=t+0.05)i=k;
+    var cur=i>=0?c[i]:null,nx=c[i+1]||null,now=$('f2-now');
+    if(cur&&t-cur.t<4){now.className='now'+(i!==f2Cur?' pop':'');now.textContent=cur.x||'¡Ahora ARMY!'}
+    else{now.className='now idle';now.textContent=c.length?'Escucha…':'Sin marcas todavía'}
+    $('f2-next').textContent=nx?'En '+Math.max(0,Math.ceil(nx.t-t))+' s: '+(nx.x||'marca sin nota'):(c.length?'No quedan más marcas':'');
+    var a=cur?cur.t:0,b=nx?nx.t:a+4;$('f2-prog').style.width=(nx?Math.min(100,Math.max(0,(t-a)/(b-a)*100)):0)+'%';
+    if(i!==f2Cur){f2Cur=i;document.querySelectorAll('#f2-cues .cue').forEach(function(r){r.classList.toggle('on',+r.dataset.f2i===i)})}
+  }
+  function f2Loop(){clearInterval(f2T);f2T=setInterval(f2Tick,100);f2Tick()}
+  $('f2-play').addEventListener('click',function(){f2Load(function(){try{f2P.getPlayerState()===1?f2P.pauseVideo():f2P.playVideo()}catch(e){}})});
+  $('f2-back').addEventListener('click',function(){if(f2Ready)try{f2P.seekTo(Math.max(0,f2Time()-5),true)}catch(e){}});
+  $('f2-mark').addEventListener('click',function(){
+    if(!f2Ready){f2Load(function(){try{f2P.playVideo()}catch(e){}});return}
+    var t=Math.max(0,Math.round((f2Time()-0.3)*10)/10),c=f2Cues();if(c.length>=80)return;
+    c.push({t:t,x:''});c.sort(function(a,b){return a.t-b.t});f2Pending=c.findIndex(function(q){return q.t===t&&!q.x});f2Save(c);f2Render();
+  });
+  $('f2-cues').addEventListener('click',function(e){
+    var s=e.target.closest('[data-f2seek]');if(s){var tt=+s.dataset.f2seek;f2Load(function(){try{f2P.seekTo(Math.max(0,tt-2),true);f2P.playVideo()}catch(err){}});return}
+    var d=e.target.closest('[data-f2del]');if(d){var c=f2Cues();c.splice(+d.dataset.f2del,1);f2Save(c);f2Render()}
+  });
+  $('f2-cues').addEventListener('change',function(e){var x=e.target.closest('[data-f2x]');if(!x)return;var c=f2Cues(),i=+x.dataset.f2x;if(!c[i])return;c[i].x=x.value.trim().slice(0,80);f2Save(c)});
+  $('f2-tabs').addEventListener('click',function(e){var b=e.target.closest('[data-f2s]');if(!b||b.dataset.f2s===f2Song)return;f2Song=b.dataset.f2s;f2Cur=-1;if(f2Ready)try{f2P.cueVideoById(f2S().yt)}catch(err){}f2Render()});
+  f2Render();
   renderWhere();tick();fillSettings();render();renderRecs();
   setInterval(tick,1000);
 
@@ -974,7 +1068,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
       else if(!seeded){seeded=true;db.doc('config/main').set(JSON.parse(JSON.stringify(config))).catch(function(){})}
     },function(e){$('sync').textContent=e&&e.code==='permission-denied'?'Firebase no permite leer. Revisa las reglas de Firestore.':'Se perdió la conexión. Recarga la página.'});
     db.collection('aportes').onSnapshot(function(snap){snap.docs.forEach(function(doc){if(!dirty[doc.id])aportes[doc.id]=clean(doc.data())});render()},function(){});
-    db.doc('fanchant/main').onSnapshot(function(s){fan=cleanFan(s.exists?s.data():null);renderFan()},function(){});
+    db.doc('fanchant/main').onSnapshot(function(s){fan=cleanFan(s.exists?s.data():null);renderFan();f2Render()},function(){});
     db.collection('recordatorios').onSnapshot(function(snap){
       recs=snap.docs.map(function(doc){var x=doc.data()||{};return {id:doc.id,texto:String(x.texto||'').slice(0,140),fecha:typeof x.fecha==='string'?x.fecha:'',hecho:x.hecho===true,creado:Number(x.creado)||0}});renderRecs();
     },function(){});
