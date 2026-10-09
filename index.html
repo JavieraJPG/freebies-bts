@@ -250,6 +250,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .stage .names span.ot7{color:#fff}
 .stage .names span.on{transform:scale(1.14);text-shadow:0 0 18px var(--c)}
 .stage .names span.ot7.on{text-shadow:0 0 18px #fff}
+.stage .names span.cl{font-style:italic}
 .drill{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 14px}
 .drill label{flex-direction:row;align-items:center;gap:8px;white-space:nowrap;color:rgba(255,255,255,.8);font-size:.88rem}
 .drill select{font:inherit;font-weight:800;color:#fff;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;max-width:62vw}
@@ -266,15 +267,20 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .stage .ari li{position:relative;overflow:hidden;padding:9px 14px 11px;border-radius:16px;background:rgba(255,255,255,.07);transition:background .15s,transform .15s,opacity .2s;transform-origin:left center}
 .stage .ari b{display:block;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.15rem,4.4vw,1.5rem);line-height:1.15;color:#fff}
 .stage .ari .g{display:block;margin-top:2px;font-size:.88rem;font-weight:800;letter-spacing:.03em;color:var(--pink)}
-.stage .ari .k{display:inline-block;margin-top:2px;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6)}
+.stage .ari .w{white-space:nowrap}
+.stage .ari .sy{font-style:normal;display:inline-block;padding:0 1px;transition:color .1s,transform .1s,text-shadow .1s;transform-origin:center bottom}
+.stage .ari .sy+.sy::before{content:"·";color:rgba(255,255,255,.3);margin-right:1px}
+.stage .ari.run li.on .sy{color:rgba(255,255,255,.45)}
+.stage .ari.run li .sy.done{color:#fff}
+.stage .ari.run li .sy.now{color:var(--pink);transform:scale(1.22);text-shadow:0 0 16px rgba(242,167,200,.95)}
 .stage .ari .tag{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;background:rgba(255,255,255,.16);font-size:.7rem;font-weight:800;color:#fff;vertical-align:1px}
 .stage .ari .pb{position:absolute;left:0;bottom:0;height:4px;width:calc(var(--p,0) * 100%);background:linear-gradient(90deg,var(--pink),#fff);transition:width .12s linear}
 .stage .ari li.on{background:rgba(255,255,255,.2);transform:scale(1.015)}
-.stage .ari li.on b{text-shadow:0 0 18px rgba(242,167,200,.95)}
+
 .stage .ari.run li:not(.on){opacity:.5}
 .drill input.arit{width:68px;font:inherit;font-weight:800;font-size:.85rem;text-align:center;color:#fff;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 8px}
 .drill input.arit::placeholder{color:rgba(255,255,255,.55)}
-@media (prefers-reduced-motion:reduce){.stage .ari li,.stage .ari .pb{transition:none}.stage .ari li.on{transform:none}}
+@media (prefers-reduced-motion:reduce){.stage .ari li,.stage .ari .pb,.stage .ari .sy{transition:none}.stage .ari li.on,.stage .ari .sy.now{transform:none}}
 .fyt{aspect-ratio:16/9;max-width:520px;border-radius:18px;overflow:hidden;margin:0 0 14px;background:#000}
 .fyt iframe,.fyt #f-yt{width:100%;height:100%;display:block;border:0}
 .stage p.ytmsg{margin:-4px 0 12px;font-size:.85rem}
@@ -839,21 +845,31 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     {id:'into-the-sun',bpm:99,n:'Into the Sun',live:23},
     {id:'come-over',n:'Come Over',live:17,extra:true}
   ];
-  var FAN_T0={'body-to-body':'0:10','body-to-body-arirang':'2:24','hooligan':'0:07','fya':'0:07','normal':'0:01'};
+  /* Solo para practicar el ritmo (no entra en la lista de 15). reps = veces que se canta el canto de nombres */
+  var DRILL_EXTRA=[{id:'mic-drop',yt:'kTlv5_Bs8aw',bpm:170,reps:2,n:'MIC Drop'}];
+  var FAN_T0={'mic-drop':'0:05','body-to-body':'0:10','body-to-body-arirang':'2:24','hooligan':'0:07','fya':'0:07','normal':'0:01'};
   var fan={sabe:{},tiempos:{}};
   /* Arirang de Body to Body: lo canta ARMY. b = compases de 3/4 de cada frase (Gyeonggi Arirang: 4+4+8+8+8) */
   var ARI_KEY='body-to-body-arirang',ARI_BPM=90,fChant='names';
   var ARI=[
-    {t:'Arirang, arirang',g:'a-ri-rang a-ri-rang',k:'아리랑 아리랑',b:4},
-    {t:'Arariyo',g:'a-ra-ri-yo',k:'아라리요',b:4},
-    {t:'Arirang gogero nomoganda',g:'a-ri-rang go-ge-ro no-mo-gan-da',k:'아리랑 고개로 넘어간다',b:8},
-    {t:'Narul borigo gashinun nimun',g:'na-rul bo-ri-go ga-shi-nun ni-mun',k:'나를 버리고 가시는 님은',b:8,army:true},
-    {t:'Shibrido motgaso balbyongnanta',g:'shib-ri-do mot-ga-so bal-byong-nan-ta',k:'십리도 못 가서 발병 난다',b:8,army:true}
+    {g:'a-ri-rang a-ri-rang',d:[2,1,3,2,1,3],b:4},
+    {g:'a-ra-ri-yo',d:[2,1,3,6],b:4},
+    {g:'a-ri-rang go-ge-ro no-mo-gan-da',d:[2,1,3,2,1,3,2,1,3,6],b:8},
+    {g:'na-rul bo-ri-go ga-shi-nun ni-mun',d:[2,1,3,2,1,3,2,1,3,6],b:8,army:true},
+    {g:'shib-ri-do mot-ga-so bal-byong-nan-ta',d:[2,1,3,2,1,3,2,1,3,6],b:8,army:true}
   ];
+  /* d = pulsos (negras) de cada sílaba, ritmo de vals 2+1+3 de Arirang; suma = b*3 */
   var ARI_AT=[],ARI_TOT=0;ARI.forEach(function(l){ARI_AT.push(ARI_TOT);ARI_TOT+=l.b});
   var CHANT=[['Kim Namjoon','rm'],['Kim Seokjin','jin'],['Min Yoongi','suga'],['Jung Hoseok','jhope'],['Park Jimin','jimin'],['Kim Taehyung','v'],['Jeon Jungkook','jk']];
-  $('f-ari').innerHTML=ARI.map(function(l){return '<li><b>'+esc(l.t)+'</b><span class="g">'+esc(l.g)+'</span><span class="k" lang="ko">'+l.k+'</span>'+(l.army?'<span class="tag">Solo ARMY</span>':'')+'<i class="pb" aria-hidden="true"></i></li>'}).join('');
-  $('f-names').innerHTML=CHANT.map(function(c){var m=MEMBERS.filter(function(x){return x.id===c[1]})[0];return '<span style="--c:'+m.c+'">'+c[0]+'!</span>'}).join('')+'<span class="ot7">BTS!</span>';
+  $('f-ari').innerHTML=ARI.map(function(l){
+    var h=l.g.split(' ').map(function(w){return '<span class="w">'+w.split('-').map(function(x){return '<i class="sy">'+esc(x)+'</i>'}).join('')+'</span>'}).join(' ');
+    return '<li><b>'+h+'</b>'+(l.army?'<span class="tag">Solo ARMY</span>':'')+'<i class="pb" aria-hidden="true"></i></li>'}).join('');
+  /* Hooligan: al final, después de BTS!, el grito chileno */
+  var CHILE=[['¡Chi chi chi!','#fff'],['¡Le le le!','#FF6B6B'],['¡Vi-va Chi-le!','#8FB8FF']],namesFor=null;
+  function buildNames(id){if(namesFor===id)return;namesFor=id;
+    $('f-names').innerHTML=CHANT.map(function(c){var m=MEMBERS.filter(function(x){return x.id===c[1]})[0];return '<span style="--c:'+m.c+'">'+c[0]+'!</span>'}).join('')+'<span class="ot7">BTS!</span>'+
+      (id==='hooligan'?CHILE.map(function(c){return '<span class="cl" style="--c:'+c[1]+'">'+c[0]+'</span>'}).join(''):'')}
+  buildNames('hooligan');
   var fOrder='show',fFilter='all',fEdit=null,drillT=null;
   var CHECK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var LYR='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.5h10M3 6.5h10M3 9.5h7M3 12.5h5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
@@ -912,15 +928,15 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   var fSong='hooligan',fSpeed=1,fReps=1,fMode='song',actx=null,ytP=null,ytReady=false,ytQ=null,ytTried=false;
   function secs(t){var m=/^(\d{1,2}):(\d{2})$/.exec(t||'');return m?(+m[1])*60+(+m[2]):null}
   function mmss(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
-  function drillSong(){for(var i=0;i<FAN.length;i++)if(FAN[i].id===fSong)return FAN[i];return FAN[1]}
+  function drillSong(){var all=FAN.concat(DRILL_EXTRA);for(var i=0;i<all.length;i++)if(all[i].id===fSong)return all[i];return FAN[1]}
   function drillBpm(s){var b=s.bpm||100;return b<90&&!s.noDouble?b*2:b}
   function fillDrill(){
-    var DRILL=['hooligan','normal','fya','body-to-body'],order=FAN.filter(function(s){return DRILL.indexOf(s.id)>=0}).sort(function(a,b){return a.live-b.live});
+    var DRILL=['hooligan','normal','fya','body-to-body'],order=FAN.filter(function(s){return DRILL.indexOf(s.id)>=0}).sort(function(a,b){return a.live-b.live}).concat(DRILL_EXTRA);
     $('f-song').innerHTML=order.map(function(s){return '<option value="'+s.id+'"'+(s.id===fSong?' selected':'')+'>'+esc(s.n)+'</option>'}).join('');
-    var ari=fChant==='ari';
+    var ari=fChant==='ari';if(drillT===null)buildNames(fSong);
     $('f-chant').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ch===fChant)});
     $('f-names').hidden=ari;$('f-ari').hidden=!ari;$('f-song-l').hidden=ari;$('f-ari-l').hidden=!ari;$('f-ari-voz').hidden=!ari;
-    $('f-intro').textContent=ari?'El cierre de Body to Body: todo el estadio canta Arirang. Arriba la letra, en rosado cómo se pronuncia:':'El canto de nombres, para practicar en Hooligan, NORMAL, FYA y Body to Body:';
+    $('f-intro').textContent=ari?'El cierre de Body to Body: todo el estadio canta Arirang. Cada sílaba se enciende al ritmo de la música, canta la que brilla en rosado:':'El canto de nombres, para practicar en Hooligan, NORMAL, FYA, Body to Body y MIC Drop'+(drillSong().reps>1?' (en '+drillSong().n+' se canta '+drillSong().reps+' veces seguidas)':'')+':';
     if(ari){var at=fanTime(ARI_KEY);if(document.activeElement!==$('f-ari-t'))$('f-ari-t').value=at;
       $('f-bpm').textContent=Math.round(ARI_BPM*fSpeed)+' BPM en 3/4';}
     else{var s=drillSong(),st=fanTime(s.id);$('f-bpm').textContent=(s.bpm?Math.round(drillBpm(s)*fSpeed)+' BPM':'~'+Math.round(100*fSpeed)+' BPM aprox.')+(st?', parte en '+st:'');}
@@ -934,7 +950,10 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   function ariPaint(pos){
     var ol=$('f-ari'),li=ol.children;ol.classList.toggle('run',pos!==null);
     var p=pos===null||pos<0?-1:pos%ARI_TOT;
-    for(var i=0;i<li.length;i++){var a=ARI_AT[i],e=a+ARI[i].b,on=p>=a&&p<e;li[i].classList.toggle('on',on);li[i].style.setProperty('--p',on?((p-a)/ARI[i].b).toFixed(3):(p>=e?'1':'0'))}
+    for(var i=0;i<li.length;i++){var a=ARI_AT[i],e=a+ARI[i].b,on=p>=a&&p<e;li[i].classList.toggle('on',on);li[i].style.setProperty('--p',on?((p-a)/ARI[i].b).toFixed(3):(p>=e?'1':'0'));
+      var sy=li[i].querySelectorAll('.sy'),d=ARI[i].d,cur=-1;
+      if(on){var bt=(p-a)*3,acc=0;for(var j=0;j<d.length;j++){if(bt<acc+d[j]){cur=j;break}acc+=d[j]}}
+      for(var j=0;j<sy.length;j++){sy[j].classList.toggle('now',j===cur);sy[j].classList.toggle('done',(on&&j<cur)||(p>=e&&p>=0))}}
   }
   $('f-chant').addEventListener('click',function(e){var b=e.target.closest('[data-ch]');if(!b||b.dataset.ch===fChant)return;drillStop();fChant=b.dataset.ch;if(fChant==='ari')fSong='body-to-body';ytMsg('');fillDrill()});
   function ariSaveT(){var inp=$('f-ari-t'),v=inp.value.trim().replace('.',':');
@@ -961,7 +980,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     fMode='beat';fillDrill();if(was)(fChant==='ari'?ariBeat:drillBeat)()}
   function drillMusic(){
     var s=drillSong(),sp=$('f-names').querySelectorAll('span'),st=secs(fanTime(s.id));if(st===null)st=0;
-    var off=st>12?st-4:0,per=2*60/drillBpm(s),total=sp.length*fReps*per,rated=false;
+    var off=st>12?st-4:0,per=2*60/drillBpm(s),R=fReps*(s.reps||1),total=sp.length*R*per,rated=false;
     $('f-ytwrap').hidden=false;ytMsg('');drillT=-1;$('f-drill-t').textContent='Cargando…';$('f-names').classList.add('cnt');
     ytLoad(function(){
       if(drillT===null)return;
@@ -972,14 +991,14 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
         if(stt===2&&t>0.3){drillStop(false);return}
         if(t<st){$('f-drill-t').textContent=stt===1?mmss(t)+' de '+fanTime(s.id):'Cargando…';return}
         var i=Math.floor((t-st)/per);
-        if(i>=sp.length*fReps){drillStop(false);return}
+        if(i>=sp.length*R){drillStop(false);return}
         $('f-names').classList.remove('cnt');sp.forEach(function(x,j){x.classList.toggle('on',j===i%sp.length)});$('f-drill-t').textContent='Detener';
       },40);
     });
   }
   function drillBeat(){
     try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){actx=null}
-    var s=drillSong(),sp=$('f-names').querySelectorAll('span'),beat=60000/(drillBpm(s)*fSpeed),k=0,PER=2,REPS=fReps;
+    var s=drillSong(),sp=$('f-names').querySelectorAll('span'),beat=60000/(drillBpm(s)*fSpeed),k=0,PER=2,REPS=fReps*(s.reps||1);
     var st=secs(fanTime(s.id)),off=0,COUNT=4;
     if(st!==null){off=st>12?st-4:0;COUNT=Math.max(1,Math.round((st-off)*1000/(beat*fSpeed)))}
     var END=COUNT+sp.length*PER*REPS;
