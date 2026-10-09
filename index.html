@@ -260,6 +260,21 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
 .drill .bpm{font-weight:800;font-size:.82rem;color:rgba(255,255,255,.7);font-variant-numeric:tabular-nums}
 .stage .names.cnt span{opacity:.35}
 #f-drill-t{font-variant-numeric:tabular-nums;min-width:8.5ch}
+.chantsel{margin:0 0 14px}
+#fanchant [hidden]{display:none!important}
+.stage .ari{list-style:none;margin:12px 0 16px;padding:0;display:grid;gap:6px}
+.stage .ari li{position:relative;overflow:hidden;padding:9px 14px 11px;border-radius:16px;background:rgba(255,255,255,.07);transition:background .15s,transform .15s,opacity .2s;transform-origin:left center}
+.stage .ari b{display:block;font-family:"Baloo 2",sans-serif;font-weight:800;font-size:clamp(1.15rem,4.4vw,1.5rem);line-height:1.15;color:#fff}
+.stage .ari .g{display:block;margin-top:2px;font-size:.88rem;font-weight:800;letter-spacing:.03em;color:var(--pink)}
+.stage .ari .k{display:inline-block;margin-top:2px;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.6)}
+.stage .ari .tag{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;background:rgba(255,255,255,.16);font-size:.7rem;font-weight:800;color:#fff;vertical-align:1px}
+.stage .ari .pb{position:absolute;left:0;bottom:0;height:4px;width:calc(var(--p,0) * 100%);background:linear-gradient(90deg,var(--pink),#fff);transition:width .12s linear}
+.stage .ari li.on{background:rgba(255,255,255,.2);transform:scale(1.015)}
+.stage .ari li.on b{text-shadow:0 0 18px rgba(242,167,200,.95)}
+.stage .ari.run li:not(.on){opacity:.5}
+.drill input.arit{width:68px;font:inherit;font-weight:800;font-size:.85rem;text-align:center;color:#fff;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 8px}
+.drill input.arit::placeholder{color:rgba(255,255,255,.55)}
+@media (prefers-reduced-motion:reduce){.stage .ari li,.stage .ari .pb{transition:none}.stage .ari li.on{transform:none}}
 .fyt{aspect-ratio:16/9;max-width:520px;border-radius:18px;overflow:hidden;margin:0 0 14px;background:#000}
 .fyt iframe,.fyt #f-yt{width:100%;height:100%;display:block;border:0}
 .stage p.ytmsg{margin:-4px 0 12px;font-size:.85rem}
@@ -407,10 +422,13 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
     <h2 id="h-fan">Fanchant ARIRANG</h2>
     <p class="sub">Los cantos oficiales de BIGHIT más Come Over. Practica con la voz guía, abre la letra y marca los que ya te sabes.</p>
     <div class="stage">
-      <p>El canto de nombres, para practicar en Hooligan, NORMAL, FYA y Body to Body:</p>
+      <div class="dseg chantsel" id="f-chant" aria-label="Qué canto practicar"><button type="button" data-ch="names" aria-pressed="true">Nombres</button><button type="button" data-ch="ari" aria-pressed="false">Arirang · Body to Body</button></div>
+      <p id="f-intro">El canto de nombres, para practicar en Hooligan, NORMAL, FYA y Body to Body:</p>
       <div class="names" id="f-names"></div>
+      <ol class="ari" id="f-ari" hidden></ol>
       <div class="drill">
-        <label>Ritmo de<select id="f-song" aria-label="Canción para practicar"></select></label>
+        <label id="f-song-l">Ritmo de<select id="f-song" aria-label="Canción para practicar"></select></label>
+        <label id="f-ari-l" hidden>Arirang parte en<input type="text" class="arit" id="f-ari-t" inputmode="numeric" maxlength="5" placeholder="m:ss" aria-label="Minuto de Body to Body donde empieza Arirang"></label>
         <div class="dseg" id="f-speed" aria-label="Velocidad"><button type="button" data-sp="0.75" aria-pressed="false">Más lento</button><button type="button" data-sp="1" aria-pressed="true">Normal</button></div>
         <div class="dseg" id="f-mode" aria-label="Sonido"><button type="button" data-md="song" aria-pressed="true">Con la canción</button><button type="button" data-md="beat" aria-pressed="false">Solo pulso</button></div>
         <div class="dseg" id="f-reps" aria-label="Veces"><button type="button" data-rp="1" aria-pressed="true">1 vez</button><button type="button" data-rp="2" aria-pressed="false">2 veces</button></div>
@@ -420,6 +438,7 @@ label{display:flex;flex-direction:column;gap:4px;font-size:.9rem;color:var(--sof
       <p class="ytmsg" id="f-ytmsg" hidden></p>
       <div class="sbtns">
         <button type="button" id="f-drill"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11l9-5.5z" fill="currentColor"/></svg><span id="f-drill-t">Practicar el ritmo</span></button>
+        <a href="https://www.youtube.com/shorts/O1Ti_sUsA0I" target="_blank" rel="noopener" id="f-ari-voz" hidden>Voz guía de Arirang</a>
         <a href="https://www.youtube.com/playlist?list=PLzId0dFgbxBuZQmu-FMWYM7VuY92lpuNN" target="_blank" rel="noopener">Playlist con voz guía</a>
         <a href="https://weverse.io/bts/notice/34592" target="_blank" rel="noopener">Guía oficial en Weverse</a>
       </div>
@@ -820,9 +839,20 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
     {id:'into-the-sun',bpm:99,n:'Into the Sun',live:23},
     {id:'come-over',n:'Come Over',live:17,extra:true}
   ];
-  var FAN_T0={'body-to-body':'0:10','hooligan':'0:07','fya':'0:07','normal':'0:01'};
+  var FAN_T0={'body-to-body':'0:10','body-to-body-arirang':'2:24','hooligan':'0:07','fya':'0:07','normal':'0:01'};
   var fan={sabe:{},tiempos:{}};
+  /* Arirang de Body to Body: lo canta ARMY. b = compases de 3/4 de cada frase (Gyeonggi Arirang: 4+4+8+8+8) */
+  var ARI_KEY='body-to-body-arirang',ARI_BPM=90,fChant='names';
+  var ARI=[
+    {t:'Arirang, arirang',g:'a-ri-rang a-ri-rang',k:'아리랑 아리랑',b:4},
+    {t:'Arariyo',g:'a-ra-ri-yo',k:'아라리요',b:4},
+    {t:'Arirang gogero nomoganda',g:'a-ri-rang go-ge-ro no-mo-gan-da',k:'아리랑 고개로 넘어간다',b:8},
+    {t:'Narul borigo gashinun nimun',g:'na-rul bo-ri-go ga-shi-nun ni-mun',k:'나를 버리고 가시는 님은',b:8,army:true},
+    {t:'Shibrido motgaso balbyongnanta',g:'shib-ri-do mot-ga-so bal-byong-nan-ta',k:'십리도 못 가서 발병 난다',b:8,army:true}
+  ];
+  var ARI_AT=[],ARI_TOT=0;ARI.forEach(function(l){ARI_AT.push(ARI_TOT);ARI_TOT+=l.b});
   var CHANT=[['Kim Namjoon','rm'],['Kim Seokjin','jin'],['Min Yoongi','suga'],['Jung Hoseok','jhope'],['Park Jimin','jimin'],['Kim Taehyung','v'],['Jeon Jungkook','jk']];
+  $('f-ari').innerHTML=ARI.map(function(l){return '<li><b>'+esc(l.t)+'</b><span class="g">'+esc(l.g)+'</span><span class="k" lang="ko">'+l.k+'</span>'+(l.army?'<span class="tag">Solo ARMY</span>':'')+'<i class="pb" aria-hidden="true"></i></li>'}).join('');
   $('f-names').innerHTML=CHANT.map(function(c){var m=MEMBERS.filter(function(x){return x.id===c[1]})[0];return '<span style="--c:'+m.c+'">'+c[0]+'!</span>'}).join('')+'<span class="ot7">BTS!</span>';
   var fOrder='show',fFilter='all',fEdit=null,drillT=null;
   var CHECK='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -887,14 +917,31 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   function fillDrill(){
     var DRILL=['hooligan','normal','fya','body-to-body'],order=FAN.filter(function(s){return DRILL.indexOf(s.id)>=0}).sort(function(a,b){return a.live-b.live});
     $('f-song').innerHTML=order.map(function(s){return '<option value="'+s.id+'"'+(s.id===fSong?' selected':'')+'>'+esc(s.n)+'</option>'}).join('');
-    var s=drillSong(),st=fanTime(s.id);$('f-bpm').textContent=(s.bpm?Math.round(drillBpm(s)*fSpeed)+' BPM':'~'+Math.round(100*fSpeed)+' BPM aprox.')+(st?', parte en '+st:'');
+    var ari=fChant==='ari';
+    $('f-chant').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ch===fChant)});
+    $('f-names').hidden=ari;$('f-ari').hidden=!ari;$('f-song-l').hidden=ari;$('f-ari-l').hidden=!ari;$('f-ari-voz').hidden=!ari;
+    $('f-intro').textContent=ari?'El cierre de Body to Body: todo el estadio canta Arirang. Arriba la letra, en rosado cómo se pronuncia:':'El canto de nombres, para practicar en Hooligan, NORMAL, FYA y Body to Body:';
+    if(ari){var at=fanTime(ARI_KEY);if(document.activeElement!==$('f-ari-t'))$('f-ari-t').value=at;
+      $('f-bpm').textContent=Math.round(ARI_BPM*fSpeed)+' BPM en 3/4';}
+    else{var s=drillSong(),st=fanTime(s.id);$('f-bpm').textContent=(s.bpm?Math.round(drillBpm(s)*fSpeed)+' BPM':'~'+Math.round(100*fSpeed)+' BPM aprox.')+(st?', parte en '+st:'');}
     $('f-mode').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.md===fMode)});
     $('f-reps').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.rp===fReps)});
     $('f-speed').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-pressed',+b.dataset.sp===fSpeed)});
   }
   function click(acc){try{if(!actx)return;var o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime;o.frequency.value=acc?1320:880;
     g.gain.setValueAtTime(acc?.28:.14,t);g.gain.exponentialRampToValueAtTime(.001,t+.08);o.connect(g);g.connect(actx.destination);o.start(t);o.stop(t+.09)}catch(e){}}
-  function drillStop(pause){clearInterval(drillT);drillT=null;if(pause!==false&&ytP&&ytReady)try{ytP.pauseVideo()}catch(e){}$('f-names').classList.remove('cnt');$('f-names').querySelectorAll('span').forEach(function(x){x.classList.remove('on')});$('f-drill-t').textContent='Practicar el ritmo'}
+  function drillStop(pause){clearInterval(drillT);drillT=null;if(pause!==false&&ytP&&ytReady)try{ytP.pauseVideo()}catch(e){}$('f-names').classList.remove('cnt');$('f-names').querySelectorAll('span').forEach(function(x){x.classList.remove('on')});ariPaint(null);$('f-drill-t').textContent='Practicar el ritmo'}
+  function ariPaint(pos){
+    var ol=$('f-ari'),li=ol.children;ol.classList.toggle('run',pos!==null);
+    var p=pos===null||pos<0?-1:pos%ARI_TOT;
+    for(var i=0;i<li.length;i++){var a=ARI_AT[i],e=a+ARI[i].b,on=p>=a&&p<e;li[i].classList.toggle('on',on);li[i].style.setProperty('--p',on?((p-a)/ARI[i].b).toFixed(3):(p>=e?'1':'0'))}
+  }
+  $('f-chant').addEventListener('click',function(e){var b=e.target.closest('[data-ch]');if(!b||b.dataset.ch===fChant)return;drillStop();fChant=b.dataset.ch;if(fChant==='ari')fSong='body-to-body';ytMsg('');fillDrill()});
+  function ariSaveT(){var inp=$('f-ari-t'),v=inp.value.trim().replace('.',':');
+    if(v===''||/^\d{1,2}:[0-5]\d$/.test(v)){if(v!==fanTime(ARI_KEY)){fan.tiempos[ARI_KEY]=v;var o={};o[ARI_KEY]=v;fanSave({tiempos:o})}ytMsg('')}
+    fillDrill()}
+  $('f-ari-t').addEventListener('change',ariSaveT);
+  $('f-ari-t').addEventListener('keydown',function(e){if(e.key==='Enter')this.blur()});
   $('f-song').addEventListener('change',function(){fSong=this.value;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
   $('f-speed').addEventListener('click',function(e){var b=e.target.closest('[data-sp]');if(!b)return;fSpeed=+b.dataset.sp;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
   $('f-reps').addEventListener('click',function(e){var b=e.target.closest('[data-rp]');if(!b)return;fReps=+b.dataset.rp;var r=!!drillT;drillStop();fillDrill();if(r)$('f-drill').click()});
@@ -911,7 +958,7 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
   }
   function ytFail(why){var s=drillSong();ytQ=null;var was=!!drillT;drillStop(false);
     ytMsg(why+' Practica con el pulso o <a href="https://www.youtube.com/watch?v='+s.yt+'" target="_blank" rel="noopener">ábrela en YouTube</a>.');
-    fMode='beat';fillDrill();if(was)drillBeat()}
+    fMode='beat';fillDrill();if(was)(fChant==='ari'?ariBeat:drillBeat)()}
   function drillMusic(){
     var s=drillSong(),sp=$('f-names').querySelectorAll('span'),st=secs(fanTime(s.id));if(st===null)st=0;
     var off=st>12?st-4:0,per=2*60/drillBpm(s),total=sp.length*fReps*per,rated=false;
@@ -945,14 +992,44 @@ var PHOTOS=["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgFBgcGBQgH
       k++}
     step();drillT=setInterval(step,beat);
   }
+  function ariMusic(){
+    var s=drillSong(),st=secs(fanTime(ARI_KEY)),BAR=3*60/ARI_BPM;
+    if(st===null){ytMsg('Anota en «Arirang parte en» el minuto de la canción donde empieza Arirang y queda guardado para todas. Mientras, practica con «Solo pulso».');$('f-ari-t').focus();return}
+    var off=Math.max(0,st-6),total=ARI_TOT*fReps,rated=false;
+    $('f-ytwrap').hidden=false;ytMsg('');drillT=-1;$('f-drill-t').textContent='Cargando…';ariPaint(-1);
+    ytLoad(function(){
+      if(drillT===null)return;
+      try{ytP.loadVideoById({videoId:s.yt,startSeconds:off});ytP.unMute()}catch(e){ytFail('No se pudo reproducir.');return}
+      drillT=setInterval(function(){
+        var t=0,stt=-1;try{t=ytP.getCurrentTime()||0;stt=ytP.getPlayerState()}catch(e){}
+        if(stt===1&&!rated){rated=true;try{ytP.setPlaybackRate(fSpeed)}catch(e){}}
+        if(stt===2&&t>0.3){drillStop(false);return}
+        if(t<st){ariPaint(-1);$('f-drill-t').textContent=stt===1?mmss(t)+' de '+fanTime(ARI_KEY):'Cargando…';return}
+        var pos=(t-st)/BAR;if(pos>=total){drillStop(false);return}
+        ariPaint(pos);$('f-drill-t').textContent='Detener';
+      },40);
+    });
+  }
+  function ariBeat(){
+    try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume()}catch(e){actx=null}
+    var beat=60000/(ARI_BPM*fSpeed),k=0,COUNT=6,END=COUNT+ARI_TOT*3*fReps;
+    ariPaint(-1);
+    function step(){
+      if(k>=END){drillStop();return}
+      if(k<COUNT){$('f-drill-t').textContent='Atentas… '+(COUNT-k);click(k%3===0)}
+      else{var j=k-COUNT;ariPaint(j/3);click(j%3===0);$('f-drill-t').textContent='Detener'}
+      k++}
+    step();drillT=setInterval(step,beat);
+  }
   $('f-drill').addEventListener('click',function(){
     if(drillT!==null){drillStop();return}
+    if(fChant==='ari'){if(fMode==='song'&&drillSong().yt)ariMusic();else ariBeat();return}
     if(fMode==='song'&&drillSong().yt)drillMusic();else drillBeat();
   });
   fillDrill();
   function cleanFan(d){var o={sabe:{},tiempos:{}};if(!d||typeof d!=='object')return o;
     if(d.sabe&&typeof d.sabe==='object')for(var i=0;i<NP;i++){var s=d.sabe['p'+i];if(s&&typeof s==='object'){o.sabe['p'+i]={};FAN.forEach(function(f){if(s[f.id]===true)o.sabe['p'+i][f.id]=true})}}
-    if(d.tiempos&&typeof d.tiempos==='object')FAN.forEach(function(f){var t=d.tiempos[f.id];if(typeof t==='string'&&(t===''||/^\d{1,2}:[0-5]\d$/.test(t)))o.tiempos[f.id]=t});
+    if(d.tiempos&&typeof d.tiempos==='object')FAN.map(function(f){return f.id}).concat([ARI_KEY]).forEach(function(id){var t=d.tiempos[id];if(typeof t==='string'&&(t===''||/^\d{1,2}:[0-5]\d$/.test(t)))o.tiempos[id]=t});
     return o}
 
   renderWhere();tick();fillSettings();render();renderRecs();
